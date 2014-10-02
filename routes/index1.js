@@ -84,6 +84,10 @@ router1.get('/customer_View11', function(req, res) {
     res.render('machine/machine_jade/043-1_S_customer_View1_machine', { title: 'machine' });
 });
 
+router1.get('/notice_write', function(req, res) {
+    res.render('machine/machine_jade/notice_write', { title: 'machine' });
+});
+
 
 
 router1.post('/getlist', board.list);
@@ -92,7 +96,7 @@ router1.post('/getboard', board.get);
 
 router1.post('/notice_write11', board.insert);
 
-
+router1.post('/insertboard2', board.insert2);
 
 router1.get('/test', function(req, res) {
     res.render('test', { title: 'machine' });
