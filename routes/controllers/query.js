@@ -18,6 +18,9 @@ exports.boardget1 = 'select * from notice where id=?';
 // title, content, file, writer, href
 exports.boardinsert = 'insert into customer_board(id, title, content, writer,company, contact, email, date) values(null,?,?,?,?,?,?,now())';
 // title, content, file, href, id
+
+exports.boardinsert2 = 'insert into notice(id, title, content, date, img) values(null,?,?,now(),?)';
+
 exports.boardmodify = 'update customer_board set title=?, content=?, contact=?, email=?, date=now() where id=?';
 
 exports.boardremove = 'delete from notice where id=?';

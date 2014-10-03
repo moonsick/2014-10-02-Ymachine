@@ -127,6 +127,19 @@ exports.insert = function (req, res) {
     });
 };
 
+exports.insert2 = function (req, res) {
+    var title = req.body.title;
+    var content = req.body.content;
+    console.log('title : ' + title)
+    // title, content, file, writer, href
+    c.query(query.boardinsert2, [ title, content]).on('result', function (res) {
+        res.on('row', function (row) {
+        });
+    }).on('end', function () {
+        res.render('machine/machine_jade/notice_write', {title: 'Ylease'});
+    });
+};
+
 exports.insertF = function (req, res) {
     var file = req.files.file;
     var dir = '\public/images/';
