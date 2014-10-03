@@ -38,10 +38,35 @@
 
 <script>
     function btn_click(){
+        alert("동작");
         window.location.href="/customer_List11";
     }
 </script>
 
+
+
+
+    <script>
+        $('#used').on('submit', function (event) {
+            $('#used').submit();
+        });
+        $('#reqList').on('submit', function (event) {
+            $('#reqList').submit();
+        });
+        var chkout = function () {
+            sessionStorage.setItem('name', '');
+            sessionStorage.setItem('role', '');
+            history.back();
+        };
+        $(document).ready(function () {
+            if (sessionStorage.getItem('role') == null || sessionStorage.getItem('role') == '') {
+
+            } else {
+
+                $('#listsee').append("<button type='submit' class='btn btn-primary pull-right'>리스트보기</button><input type='hidden' name='role' value='" + sessionStorage.getItem('role') + "'>");
+            }
+        });
+    </script>
 
 
 
@@ -80,7 +105,7 @@
             <div class="row clearfix">
                 <div class="container">
                     <div class="col-md-12 column">
-                        <form role="form">
+                        <form role="form" id="used" action="/customer_write11" method="post">
                             <div class="row clearfix">
                                 <div class="col-md-12 column">
                                     <div class="form-group">
@@ -89,7 +114,7 @@
                                         <div class="row clearfix"></div>
                                         <input type="text" placeholder="문의사항 제목을 적어주세요"
                                                class="form-control" id="usedInputTitle"
-                                               autofocus="autofocus" />
+                                               autofocus="autofocus" name="usedInputTitle" />
                                     </div>
                                 </div>
                             </div>
@@ -101,14 +126,14 @@
                                         <p class="help-block">*필수 항목입니다</p>
                                         <div class="row clearfix"></div>
                                         <input type="text" placeholder="작성자 성함을 적어주세요"
-                                               class="form-control myhalfinput" id="" />
+                                               class="form-control myhalfinput" id="" name="usedInputname" />
                                     </div>
                                     <div class="form-group ">
                                         <label for="usedInputCompany">업체명</label>
                                         <p class="help-block">*필수 항목입니다</p>
                                         <div class="row clearfix"></div>
                                         <input type="text" placeholder="업체명을 적어주세요"
-                                               class="form-control myhalfinput" id="" />
+                                               class="form-control myhalfinput" id="" name="usedInputCompany"/>
                                     </div>
                                 </div>
                                 <div class="col-md-6 column visible-md visible-lg myhalf">
@@ -118,7 +143,7 @@
                                         <div class="row clearfix"></div>
                                         <input type="tel"
                                                placeholder="연락처를 적어주세요. 적어주신 연락처로 연락드리겠습니다"
-                                               class="form-control myhalfinput" id="" />
+                                               class="form-control myhalfinput" id="" name="usedInputCall"/>
                                     </div>
 
                                     <div class="form-group">
@@ -126,7 +151,7 @@
                                         <div class="row clearfix"></div>
                                         <input type="email"
                                                placeholder="등록하시면 와이머신의 최신 홍보자료를 받으실 수 있습니다"
-                                               class="form-control myhalfinput" id="usedInputEmail" />
+                                               class="form-control myhalfinput" id="usedInputEmail" name="usedInputEmail" />
                                     </div>
                                 </div>
 
@@ -136,14 +161,14 @@
                                         <p class="help-block">*필수 항목입니다</p>
                                         <div class="row clearfix"></div>
                                         <input type="text" placeholder="작성자 성함을 적어주세요"
-                                               class="form-control" id="" />
+                                               class="form-control" id="" name="" />
                                     </div>
                                     <div class="form-group ">
                                         <label for="usedInputCompany">업체명</label>
                                         <p class="help-block">*필수 항목입니다</p>
                                         <div class="row clearfix"></div>
                                         <input type="text" placeholder="업체명을 적어주세요"
-                                               class="form-control" id="" />
+                                               class="form-control" id="" name=""/>
                                     </div>
                                     <div class="form-group">
                                         <label for="usedInputCall">연락처</label>
@@ -151,7 +176,7 @@
                                         <div class="row clearfix"></div>
                                         <input type="tel"
                                                placeholder="연락처를 적어주세요. 적어주신 연락처로 연락드리겠습니다"
-                                               class="form-control" id="" />
+                                               class="form-control" id="" name=""/>
                                     </div>
 
                                     <div class="form-group">
@@ -159,7 +184,7 @@
                                         <div class="row clearfix"></div>
                                         <input type="email"
                                                placeholder="이메일을 등록하시면 와이머신의 최신 홍보자료를 받으실 수 있습니다"
-                                               class="form-control" id="usedInputEmail" />
+                                               class="form-control" id="" name=""/>
                                     </div>
                                 </div>
                             </div>
@@ -170,14 +195,14 @@
                                         <label for="usedInputContent">내용</label>
                                         <p class="help-block">*필수 항목입니다</p>
                                         <div class="row clearfix"></div>
-                                        <textarea rows="10" cols="" class="form-control" id="usedInputContent" placeholder="문의사항을 적어주세요"></textarea>
+                                        <textarea rows="10" name="usedInputContent" cols="" class="form-control" id="usedInputContent" placeholder="문의사항을 적어주세요"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="usedInputFilelist">파일리스트</label>
                                         <div class="row clearfix"></div>
 
                                         <div class="myfilelist">
-                                            <input type="file" id="usedInputFile">
+                                            <input type="file" id="">
                                             <ul class="list-unstyled">
                                                 <li>aaaa.jpg</li>
                                                 <li>bbbb.jpg</li>

@@ -56,6 +56,23 @@ exports.list = function (req, res) {
     });
 };
 
+exports.list1 = function (req, res) {
+    var sending = [];
+    console.log('this is get list');
+    c.query(query.boardlist1, null).on('result', function (res) {
+        res.on('row', function (row) {
+            sending.push(row);
+        });
+    }).on('end', function () {
+        var obj = {sending: sending};
+        if (sending[0] != null) {
+            res.send(200, obj);
+        } else {
+            res.send(500, obj);
+        }
+    });
+};
+
 exports.get = function (req, res) {
     var id = req.body.id;
     var sending = [];
@@ -72,16 +89,42 @@ exports.get = function (req, res) {
         }
     });
 };
+exports.get1 = function (req, res) {
+    var id = req.body.id;
+    var sending = [];
+    c.query(query.boardget1, [ id ]).on('result', function (res) {
+        res.on('row', function (row) {
+            sending.push(row);
+        });
+    }).on('end', function () {
+        var obj = {sending: sending};
+        if (sending[0] != null) {
+            res.send(200, obj);
+        } else {
+            res.send(500, obj);
+        }
+    });
+};
+
 
 exports.insert = function (req, res) {
     var title = req.body.usedInputTitle;
     var content = req.body.usedInputContent;
+    var writer = req.body.usedInputname;
+    var company = req.body.usedInputCompany;
+    var contact = req.body.usedInputCall;
+    var email = req.body.usedInputEmail;
+    if (email == null || email == '') {
+        email = '이메일 입력 안함';
+    }
     console.log('title : ' + title)
     // title, content, file, writer, href
-    c.query(query.boardinsert, [ title, content]).on('result', function (res) {
+    c.query(query.boardinsert, [ title, content, writer, company, contact, email ]).on('result', function (res) {
         res.on('row', function (row) {
         });
-    })
+    }).on('end', function () {
+        res.render('machine/machine_jade/043-1_S_customer_Write1_machine', {title: 'Mesong'});
+    });
 };
 
 exports.insertF = function (req, res) {
@@ -128,7 +171,6 @@ exports.update = function (req, res) {
 
 exports.delete = function (req, res) {
     var id = req.body.id;
-
     c.query(query.boardremove, [id]).on('result', function (res) {
         res.on('row', function (row) {
         });

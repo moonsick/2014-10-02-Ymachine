@@ -85,12 +85,25 @@ router1.get('/customer_View11', function(req, res) {
 });
 
 
+router1.get('/kkk', function(req, res) {
+    res.render('machine/machine_jade/kkk', { title: 'machine' });
+});
+
+
+
 
 router1.post('/getlist', board.list);
 
-router1.post('/getboard', board.get);
+router1.post('/getlist1', board.list1);
 
-router1.post('/notice_write11', board.insert);
+router1.post('/getboard', board.get);
+router1.post('/getboard1', board.get1);
+
+
+router1.post('/customer_write11', board.insert);
+
+
+router1.post('/notice_List11', board.delete);
 
 
 

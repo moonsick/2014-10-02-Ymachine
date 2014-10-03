@@ -42,7 +42,7 @@
             var items = [];
             var num = 1;
             var pagedItem = [];
-            $.post('/getlist', function (data) {
+            $.post('/getlist1', function (data) {
                 items = data.sending;
                 divide(num);
                 pagenation(items.length / 5);
