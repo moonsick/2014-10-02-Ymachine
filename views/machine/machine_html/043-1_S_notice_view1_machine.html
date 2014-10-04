@@ -31,42 +31,6 @@
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/scripts.js"></script>
 
-
-
-
-        <script>
-            $(document).ready(function () {
-                var title = document.getElementById('usedInputTitle');
-                var content = document.getElementById('usedInputContent');
-                var url = window.location.href;
-                var id = url.indexOf('?');
-                var send = url.slice(id + 4);
-                $.post('/getboard1', {id: send}, function (data) {
-                    var message = data.sending[0];
-                    title.value = message.title;
-                    content.value = message.content;
-                });
-
-            });
-        </script>
-
-
-
-<script>
-    function kang(){
-alert("자동");
-        var url = window.location.href;
-        var id = url.indexOf('?');
-        var send = url.slice(id + 4);
-
-        $.post('/notice_List11', {id: send}, function (data) {
-        });
-    };
-
-</script>
-
-
-
     </head>
 
 	<body>
@@ -104,14 +68,14 @@ alert("자동");
 								<th> 제목 </th>
 								<td>
 								<div class="col-sm-12">
-									<input type="text" class="form-control input-sm" id="usedInputTitle" readonly="readonly" />
+									<input type="text" class="form-control input-sm" id="title" readonly="readonly" />
 								</div></td>
 							</tr>
 							<tr>
 								<th> 내용 </th>
 								<td>
 								<div class="col-sm-12">
-									<textarea class="form-control" id="usedInputContent" rows="10" readonly="readonly"></textarea>
+									<textarea class="form-control" id="content" rows="10" readonly="readonly"></textarea>
 								</div></td>
 							</tr>
 							<tr>
@@ -142,24 +106,48 @@ alert("자동");
 			<div class="row clearfix tb01">
 				<div class="col-md-12 column">
 					<div class="btn-group pull-right">
-						<a href="/notice_List11"><button type="button" class="btn btn-write">
+						<a href="/notice_List11" id="liston"><button type="button" class="btn btn-write">
 							목록
-						</button></a>
-						<a href="/main1"><button type="button" class="btn btn-write">
-							수정
-						</button></a>
-						<a href="main1"><button type="button" class="btn btn-write">
+                            </button></a>
+
+                        <button type="button" onclick="btn_click()" class="btn btn-write">
+                            수정
+                        </button>
+
+                        <h1></h1>
+                        <form role="form" id="used" action="/deleteboard" method="post">
+						<button type="submit" class="btn btn-write">
 							삭제
-						</button></a>
+						</button>
+                                <input type="hidden" class="form-control input-sm" name="id2" id="id2"/>
+                        </form>
 					</div>
 				</div>
 			</div>
-            <a onclick="kang()"><button type="button" class="btn btn-write">
-                삭제
-            </button></a>
+		</div>
 
-        </div>
-
-
+    <script>
+        $(document).ready(function () {
+            var title = document.getElementById('title');
+            var content = document.getElementById('content');
+            var id2 = document.getElementById('id2');
+            var url = window.location.href;
+            var id = url.indexOf('?');
+            var send = url.slice(id + 4);
+            $.post('/getboard', {id: send}, function (data) {
+                var message = data.sending[0];
+                title.value = message.title;
+                content.value = message.content;
+                id2.value = send;
+                date.value = '작성일 : ' + message.date;
+            });
+        });
+        function btn_click(){
+            var url = window.location.href;
+            var id = url.indexOf('?');
+            var send = url.slice(id + 4);
+            window.location.href="/notice_su?id="+send;
+        }
+    </script>
 	</body>
 </html>

@@ -107,6 +107,23 @@ exports.get1 = function (req, res) {
 };
 
 
+exports.get2 = function (req, res) {
+    var id = req.body.id;
+    var sending = [];
+    c.query(query.boardget2, [ id ]).on('result', function (res) {
+        res.on('row', function (row) {
+            sending.push(row);
+        });
+    }).on('end', function () {
+        var obj = {sending: sending};
+        if (sending[0] != null) {
+            res.send(200, obj);
+        } else {
+            res.send(500, obj);
+        }
+    });
+};
+
 exports.insert = function (req, res) {
     var title = req.body.usedInputTitle;
     var content = req.body.usedInputContent;
@@ -161,35 +178,33 @@ exports.insertF = function (req, res) {
 };
 
 exports.update = function (req, res) {
-    var id = req.body.id;
+    var id2 = req.body.id2;
     var title = req.body.title;
     var content = req.body.content;
-    var contact = req.body.contact;
-    var email = req.body.email;
 
+    console.log(id2);
     console.log(title);
     console.log(content);
-    console.log(file.name);
-    console.log(href);
 
 // title, content, file, href, id
-    c.query(query.boardmodify, [ title, content, contact, email, id ]).on('result', function (res) {
+    c.query(query.boardmodify, [title, content, id2]).on('result', function (res) {
         res.on('row', function (row) {
         });
     }).on('end', function () {
         var obj = '수정하였습니다.';
-        res.send(200, obj);
+        res.render('machine/machine_jade/043-1_S_notice_List1_machine', {title: 'Ylease'});
     });
 };
 
 exports.delete = function (req, res) {
-    var id = req.body.id;
+    var id = req.body.id2;
+    console.log(id);
     c.query(query.boardremove, [id]).on('result', function (res) {
         res.on('row', function (row) {
         });
     }).on('end', function () {
         var obj = '삭제하였습니다.';
-        res.send(200, obj);
+        res.render('machine/machine_jade/043-1_S_notice_List1_machine', {title: 'Ylease'});
     });
 };
 /*

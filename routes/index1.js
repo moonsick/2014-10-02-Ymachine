@@ -88,28 +88,31 @@ router1.get('/notice_write', function(req, res) {
     res.render('machine/machine_jade/notice_write', { title: 'machine' });
 });
 
-
-router1.get('/kkk', function(req, res) {
-    res.render('machine/machine_jade/kkk', { title: 'machine' });
+router1.get('/notice_su', function(req, res) {
+    res.render('machine/machine_jade/notice_su', { title: 'machine' });
 });
 
+router1.get('/new_list', function(req, res) {
+    res.render('machine/machine_jade/new_list', { title: 'machine' });
+});
 
 
 
 router1.post('/getlist', board.list);
 
-router1.post('/getlist1', board.list1);
-
 router1.post('/getboard', board.get);
-router1.post('/getboard1', board.get1);
 
-
-router1.post('/customer_write11', board.insert);
-
-
-router1.post('/notice_List11', board.delete);
+router1.post('/notice_write11', board.insert);
 
 router1.post('/insertboard2', board.insert2);
+
+router1.post('/getdata', board.chk);
+
+router1.post('/insertboard', board.insert);
+
+router1.post('/updateboard', board.update);
+
+router1.post('/deleteboard', board.delete);
 
 router1.get('/test', function(req, res) {
     res.render('test', { title: 'machine' });
